@@ -1,0 +1,54 @@
+;; Popular generic options
+;;
+(menu-bar-mode -1)
+(setq-default inhibit-startup-message t)
+(setq x-select-enable-clipboard t)
+
+;; turn on visual bell
+(setq visible-bell t)
+
+(setq font-lock-maixmum-decoration t)
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+;; turn on paren matching
+(show-paren-mode t)
+(setq show-paren-stype 'mixed)
+
+;; show columns
+(setq column-number-mode t)
+
+;; C, C++ options
+
+;; do comment spell check
+(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+(add-hook 'python-mode-hook 'flyspell-prog-mode)
+
+;; .h files are c++ ones
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; set google style for c/c++
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+;; Project shortcuts
+;; we expect that PROJ environment
+;; points to the top of the project
+
+;; Compile project
+(defun cpr ()
+  "Run project compile"
+  (interactive)
+  (compile (concat "cd " (getenv "PROJ") "; make")))
+
+;; Makefile.inc, Makefile.cur etc will use makefile mode
+(add-to-list 'auto-mode-alist '("\\(/\\|\\`\\)[Mm]akefile" . makefile-gmake-mode))
+
+
+;; Python options
+;;
+
+;; setup flycheck for python
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
