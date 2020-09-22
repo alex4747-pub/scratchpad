@@ -1,0 +1,4 @@
+alias tn='tmux new -s'
+alias ta='tmux a -t'
+alias set_proj='export PROJ=`pwd`'
+alias cdp='cd $PROJ'
