@@ -27,6 +27,9 @@
 ;; .h files are c++ ones
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+;; Do not prompt to save files when compiling
+(setq compilation-ask-about-save nil)
+
 ;; set google style for c/c++
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
